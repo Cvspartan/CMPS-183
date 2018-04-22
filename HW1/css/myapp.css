@@ -1,0 +1,61 @@
+div.main div.topbar{
+    background-color: #082E5A;
+    color: gold;
+    padding: 10px;
+    height: 150px;
+}
+
+div.main div.topbar div.date{
+    text-align: right;
+    font-size: 25px;
+    padding-top: 100px;
+}
+
+div.main div.topbar div.logo{
+    padding: 15px;
+}
+
+div.PBtext{
+    column-count: 2;
+    column-width: 150px;
+}
+
+div.main div.news{
+    padding: 18px;
+}
+
+div.main div.news div.bold {
+    font-weight: bold;
+    padding: 8px;
+}
+
+div.main div.news div.largebold {
+    font-weight: bold;
+    font-size: 160%;
+    padding: 8px;
+}
+
+div.main div.news div.author{
+    font-size: 70%;
+    padding: 5px;
+}
+
+div.main div.bottombar{
+    background-color: #082E5A;
+    padding: 10px;
+    height: 150px;
+
+}img.toplogo{
+    width: 70%;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+img.extend{
+    width: 100%;
+}
+
+img.maitra{
+    height: 28%;
+    width: 100%;
+}

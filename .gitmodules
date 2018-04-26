@@ -1,0 +1,3 @@
+[submodule "HW2/web2py/applications/start"]
+	path = HW2/web2py/applications/start
+	url = https://github.com/Cvspartan/CMPS-183/tree/master/HW2/web2py/applications

@@ -1,0 +1,70 @@
+{{extend 'layout.html'}} {{block head}}
+
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+  // Define your URLs here.
+  var get_users_url = "{{=URL('api', 'get_users')}}";
+  var add_photo_url = "{{=URL('api', 'add_photo', user_signature=True)}}";
+  var get_photos_url = "{{=URL('api', 'get_user_images', user_signature=True)}}";
+
+</script> {{end}}
+
+<div class="main_content">
+
+  <div id="vue-div" class="display:none">
+    <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+
+    <div v-if="logged_in_user != null" class="container padded">
+
+      <div class="image_space threequarters">
+        <!-- Left part of the page -->
+        <div v-if="self_page">
+          <!-- Code to upload files, with control buttons -->
+          <div id="uploader_div" style="display:none">
+            Upload an image file:
+            <input id="file_input" type="file" v-on:change="upload_file" accept="image/jpeg">
+          </div>
+
+          <button v-if="!is_uploading" v-on:click="open_uploader">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button v-if="is_uploading" v-on:click="close_uploader">Cancel</button>
+        </div>
+
+        <div class="image_container">
+          <!-- Put here the code to display the images -->
+
+          <ul class="container">
+            <li v-for="image in images" class="card lifted padded quarter">
+              <img v-bind:src="image.image_url" height="200px" width="200px" class="padded" />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="user_space quarter right">
+        <!-- Right part of the page -->
+        <table class="fill" id="user_selector">
+          <tbody>
+            <tr class="center" v-on:click="change_user(logged_in_user.id)">
+              <!-- This row is you; code for getting your own images, and for setting self_page -->
+              <td>${logged_in_user.first_name + " " + logged_in_user.last_name}</td>
+            </tr>
+            <!-- Then, one row for each person. -->
+            <tr v-for="user in users" class="center" v-on:click="change_user(user.id)">
+              <td>${user.first_name + " " + user.last_name}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+    <div v-else class="container padded">
+      Please log in to see photos!
+    </div>
+
+  </div>
+
+  <script src="{{=URL('static', 'js/default_index.js')}}"></script>

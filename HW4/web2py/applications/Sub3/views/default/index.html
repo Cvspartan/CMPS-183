@@ -1,0 +1,76 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+  {{if auth.user is None:}}
+    var is_user_logged_in = false;
+  {{else:}}
+    var is_user_logged_in = true;
+    {{pass}}
+
+  var add_image_url = "{{=URL('api', 'add_image', user_signature=True)}}";
+  var get_user_images_url = "{{=URL('api', 'get_user_image', user_signature=True)}}";
+  var get_user_names_url = "{{=URL('api', 'get_user_names', user_signature=True)}}";
+  console.log("the image url is : " + add_image_url);
+</script>
+
+
+{{end}}
+
+<div class="main_content">
+
+  <div id="vue-div" class="display:none">
+    <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+
+    <div class="container padded">
+
+      <img v-if="show_img" v-bind:src="img_url" height="200px" width="200px" class="padded" />
+
+      <div class="image_space threequarters">
+
+        <div v-if="self_page">
+          <div id="uploader_div" style="display:none">
+            Upload an image file: <input id="file_input" type="file" v-on:change="upload_file" accept="image/jpeg">
+          </div>
+
+          <button v-if="!is_uploading" v-on:click="open_uploader"><i class="fa fa-plus"></i></button>
+          <button v-if="is_uploading"  v-on:click="close_uploader">Cancel</button>
+        </div>
+
+        <div class="image_container">
+          <img v-if="show_img" v-bind:src="img_url" height="200px" width="200px" class="padded"/>
+
+          <ul class="container">
+             <li v-if="show_img" v-for="image in user_images" class="card lifted padded quarter">
+               <img v-bind:src="image.img_url" height="200px" width="200px" class="padded"/>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="user_space quarter right">
+        <!-- Right part of the page -->
+        <table class="fill" id="user_selector">
+          <!-- <tbody v-for="users in user_name_list"> -->
+          <tbody>
+            <tr class="center">
+              <!-- <td>${users.first_name} ${users.last_name}</td> -->
+            </tr>
+            <tr class="center">
+              <td>Jane Doe</td>
+            </tr>
+            <tr class="center">
+              <td>Buzz Lightyear</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+  </div>
+
+</div>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
